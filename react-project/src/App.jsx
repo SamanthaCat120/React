@@ -1,20 +1,43 @@
 import './App.css'
 
-function Header() {
+function Header({name, year}) {
   return (
     <header>
-      <h1>Eve's Kitchen</h1>
+      <h1>{name}'s Kitchen</h1>
+      <p>Copyright {year}</p>
     </header>
+  );
+}
+const items = [
+  "Macaroni and Cheese",
+  "Salmon with Potatoes",
+  "Tofu with Vegetables",
+  "Minestrone Soup"
+];
+
+const dishObjects = items.map((dish, i) => ({
+  id: i,
+  title: dish
+}));
+
+function Main({dishes}) {
+  return (
+    <ul>
+      {dishes.map((dish) => (
+        <li key={dish.id} style={{ listStyleType: "none" }}>
+          {dish.title}
+        </li>
+      ))}
+    </ul>
   );
 }
 
 function App() {
   return (
   <div>
-    <Header />
-    <main>
-      <h2>We serve the most delicious food around</h2>
-    </main>
+    <Header name="Alex" year={new Date().getUTCFullYear()}/>
+  
+    <Main dishes={dishObjects} />
   </div>
   );
 }
